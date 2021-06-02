@@ -166,51 +166,6 @@ def show():
     ysb.place(x=40 + 900 + 1, y=10, height=310 + 20)  
     xsb.place(x=60 , y=150+200+1, width=870 + 20)
     
-    id = StringVar()
-    id_box=Entry(showFrame,textvariable=id,font=("Helvetica",9))
-    id_box.place(relx=0.200, rely=0.700, height=30, width=80)
-              
-    Del = Button(showFrame, text="Delete",command =delete,bg="#800000",foreground="Yellow")
-    Del.place(relx=0.300, rely=0.700, height=30, width=80)
-              
-    update = Button(showFrame, text="Update",bg="#800000",foreground="Yellow",command =Update)
-    update.place(relx=0.500, rely=0.700, height=30, width=80)
-    
-    home =  Button(showFrame, text="Home",bg="#800000",foreground="Yellow",command =register)
-    home.place(relx=0.700, rely=0.700, height=30, width=80)
-
-def delete():
-    id=id.get()
-    conn=sqlite3.connect('data.db')
-    cursor=conn.cursor()
-    cursor.execute("DELETE  FROM  StudentNames ID ='%s'" % (id))
-    conn.commit()
-    messagebox.showinfo("Information", "Your record is successfully deleted!")
-    cursor.close 
-    
-    try:
-        SelectedRow= tree.selection()[0]
-        tree.delete(SelectedRow)
-
-    except IndexError: 
-           Error=messagebox.showinfo("Error!","Please seleect the project that you want to delete")
-           sys.exit() #za resavalje greske
-           pass
-
-    except ValueError: 
-           Error=messagebox.showinfo("Error!","Please seleect the project that you want to delete")
-           sys.exit() #za resavalje greske
-           pass
-    tree.bind("<Delete>",delete)
-    tree.bind("<BackSpace>",delete)
-    
-    show()         
-
-def Update(): 
-    delete()  
-    register()
-register()    
-
 #========================================INITIALIZATION===================================
 if __name__ == '__main__':
     root.mainloop()
